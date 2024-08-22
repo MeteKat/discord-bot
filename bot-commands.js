@@ -4,22 +4,18 @@ const { Routes } = require('discord-api-types/v10');
 const { ApplicationCommandOptionType } = require('discord.js');
 
 const commands = [
-	{
-		name:"selam",
-		description:"Selam verir",
-	},
-	{
-		name:"embed",
-		description:"Oyun sonuçlarını gösterir",
-	},
+	//{
+	//	name:"embed",
+	//	description:"Oyun sonuçlarını gösterir",
+	//},
 	{
 		name:"test",
 		description:"Fonksiyon testleri yapar",
 	},
-	{
-		name:"deneme",
-		description:"Deneme yapar",
-	}
+	//{
+	//	name:"deneme",
+	//	description:"Deneme yapar",
+	//}
 ]
 
 const rest = new REST({version:'10'}).setToken(process.env.TOKEN);
