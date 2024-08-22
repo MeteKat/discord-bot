@@ -86,8 +86,7 @@ function reset_game_info() {
 }
 
 
-async function make_embed(interaction) {
-// TODO - burayı düzelt
+async function make_embed() {
 
 const exampleEmbed = new EmbedBuilder();
 exampleEmbed.setColor(0xff0000)
@@ -109,10 +108,6 @@ for (let i = 0; i < game_info.opponents.length; i++) {
 	exampleEmbed.addFields({ name: game_info.opponents[i] + "  (" + game_info.opponents_civs[i] + ") ", value: game_info.opponents_elos[i], inline: true });
 	//exampleEmbed.addFields({ name: '\u200B', value: '\u200B' })
 }
-//.addFields({ name: game_info.opponents[0] + "  (" + game_info.opponents_civs[0] + ") ", value: game_info.opponents_elos[0], inline: true })
-//.addFields({ name: game_info.opponents[1] + "  (" + game_info.opponents_civs[1] + ") ", value: game_info.opponents_elos[1], inline: true })
-//.addFields({ name: game_info.opponents[2] + "  (" + game_info.opponents_civs[2] + ") ", value: game_info.opponents_elos[2], inline: true })
-//.addFields({ name: game_info.opponents[2] + "  (" + game_info.opponents_civs[2] + ") ", value: game_info.opponents_elos[2], inline: true })
 exampleEmbed
 .setImage(map_urls[game_info.map])
 .setTimestamp()
