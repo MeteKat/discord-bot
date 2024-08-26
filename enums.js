@@ -10,18 +10,6 @@ const names = [
 	"TulumPeyniri"
 ]
 
-var game_info = {
-	server: "", 
-	map: "",
-	opponents: [],
-	opponents_civs: [],
-	opponents_elos: [],
-	url: "",
-	result: "",
-	time: "",
-	last_game: ""
-}
-
 const id_list = [
 	17078472,
 	8822751,
@@ -32,7 +20,7 @@ const map_urls = {
 	"African Waters" : "https://liquipedia.net/commons/images/thumb/c/cc/African_Waters_AoE4_icon.png/300px-African_Waters_AoE4_icon.png",
 	"Altai" : "https://liquipedia.net/commons/images/d/da/Altari_AoE4.png",
 	"Ancient Spires" : "https://liquipedia.net/commons/images/b/b6/Ancient_Spires_AoE4.png",
-	"Dry Arabia ": "https://liquipedia.net/commons/images/4/45/Arabia_%28AOE4%29_Icon.png",
+	"Dry Arabia": "https://liquipedia.net/commons/images/4/45/Arabia_%28AOE4%29_Icon.png",
 	"Archipelago" : "https://liquipedia.net/commons/images/2/2d/Archipelago_AoE4.png",
 	"Baltic" : "https://liquipedia.net/commons/images/thumb/5/58/Baltic_AoE4_icon.png/300px-Baltic_AoE4_icon.png",
 	"Basin" : "https://liquipedia.net/commons/images/6/6c/Basin_%28AoE4%29_Icon.png",
@@ -101,4 +89,4 @@ const map_urls = {
 	"WoodWall" : "https://liquipedia.net/commons/images/2/2b/Woodwall_%28AoE4%29_Icon.png"
 }
 
-module.exports = {name_list, game_info, names, map_urls};
+module.exports = {name_list, names, map_urls};

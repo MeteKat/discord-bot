@@ -8,10 +8,13 @@
   },
   "dependencies": {
     "@discordjs/rest": "^2.3.0",
+    "discord-bot": "file:",
     "discord.js": "^14.15.3",
     "dotenv": "^8.2.0",
-	"fetch": "^1.1.0"
-},
+    "fetch": "^1.1.0",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.3"
+  },
   "author": "",
   "license": "ISC"
 }

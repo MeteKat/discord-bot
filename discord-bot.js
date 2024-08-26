@@ -1,51 +1,78 @@
-const Discord = require("discord.js");
-require("fetch");
 require("dotenv").config();
-const {name_list, game_info} = require('./enums.js')
-const {get_opponents_data, get_game_data, make_embed} = require('./api-requests.js');
+const Discord = require("discord.js");
+const { name_list } = require('./enums.js')
+const { get_opponents_data, get_game_data, make_embed, fill_game_info} = require('./api-requests.js');
+const { connectDb } = require('./db_connection.js');
+const { create_db } = require('./game_data.js');
 
 
-const client = new Discord.Client(
-	{
-		intents: [
-			Discord.IntentsBitField.Flags.Guilds,
-			Discord.IntentsBitField.Flags.GuildMessages,
-			Discord.IntentsBitField.Flags.GuildMembers,
-			Discord.IntentsBitField.Flags.MessageContent,
-		]
-	}
-);
-
-client.on("ready", () => {
-	console.log(`Logged in as ${client.user.tag}!`);
-	const bot = client.channels.cache.find((abc) => abc.name == "bot-test");
-	//bot.send("Sa")
-});
-
-//Rakip elo = ${player_data.modes.rm_solo.rank_level}
-client.on("interactionCreate", async (interaction) => {
-	if(interaction.commandName === "test")
-	{
-		Promise.all([game_data, player_data]).then((values) => {
-			interaction.reply(`Server: ${values[0].games[0].server}/t${values[1][0].name} civ = ${values[1][0].civ} elo = ??`);
-		});
-	}
-})
-
-async function check_for_new_data() {
+async function check_for_new_data(client, game_datas) {
 	let client_obj = client.channels.cache.find((abc) => abc.name == "bot-test");
 	let user;
 	for (let i = 0; i < 3; i++) {
 		user = name_list[Object.keys(name_list)[i]];
-		const game_data = await get_game_data(user);
-		if(!game_data)
-			return
-		await get_opponents_data(game_data);
-		let embed = await make_embed();
-		client_obj.send({embeds: [embed]});
+		console.log("Checking for new data for " + user + "\n");
+		const last_game_data = await game_datas.findOne()
+		const game_data_response = await get_game_data(user);
+		if(!game_data_response)
+		{
+			console.log("No new data for " + user + "\n");
+			continue
+		}
+		if(!last_game_data)
+			continue
+		if (last_game_data.game_ids == undefined)
+			last_game_data.game_ids = {}
+		if(Object.values(last_game_data.game_ids).includes(game_data_response.game_id) || game_data_response.ongoing == true || game_data_response.just_finished == true)
+			continue
+		const opponents = await get_opponents_data(last_game_data, game_data_response);
+		await fill_game_info(opponents, game_data_response, last_game_data, user);
+		let embed = await make_embed(last_game_data);
+		reset_game_info(game_datas);
+		console.log("New data found for " + user + "\n");
+
+		
+		return (client_obj.send({embeds: [embed]}));
 	}
 }
 
-setInterval(check_for_new_data, 1000 * 60 * 1);
+function reset_game_info(game_datas) {
+	game_datas.findOneAndUpdate({},{
+		server : "",
+		map : "",
+		opponents : [],
+		opponents_civs : [],
+		opponents_elos : [],
+		url : "",
+		result : "",
+		time : "",
+	});
+}
+async function main() {
+	
+	await connectDb(`${process.env.DB_URI}`);
+	const game_datas = await create_db();
+	
+	const client = new Discord.Client(
+		{
+			intents: [
+				Discord.IntentsBitField.Flags.Guilds,
+				Discord.IntentsBitField.Flags.GuildMessages,
+				Discord.IntentsBitField.Flags.GuildMembers,
+				Discord.IntentsBitField.Flags.MessageContent,
+			]
+		}
+	);
+	
+	client.on("ready", async () => {
+		console.log(`Logged in as ${client.user.tag}!`);
+		const bot = client.channels.cache.find((abc) => abc.name == "bot-test");
+		//bot.send("Sa")
+		check_for_new_data( client, game_datas)
+		setInterval(()=>check_for_new_data( client, game_datas), 1000 * 30 * 1);
+	});
 
-client.login(`${process.env.TOKEN}`);
+	client.login(`${process.env.TOKEN}`);
+}
+
+main();
