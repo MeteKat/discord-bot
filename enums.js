@@ -63,6 +63,7 @@ const map_urls = {
 	"Lipany" : "https://liquipedia.net/commons/images/9/99/Lipany_AoE4.png",
 	"Marshland" : "https://liquipedia.net/commons/images/d/d9/Marshland_Icon_AoE4.JPG",
 	"MegaRandom" : "https://liquipedia.net/commons/images/1/1e/MegaRandom_AoE4.png",
+	"Land MegaRandom" : "https://liquipedia.net/commons/images/1/1e/MegaRandom_AoE4.png",
 	"Migration" : "https://liquipedia.net/commons/images/1/1d/Migration_%28AoE4%29.PNG",
 	"Mongolian Heights" : "https://liquipedia.net/commons/images/b/b3/Mongolian_Heights_AoE4.png",
 	"Mountain Clearing" : "https://liquipedia.net/commons/images/thumb/5/5b/Mountain_Clearing_AoE4_icon.png/300px-Mountain_Clearing_AoE4_icon.png",
