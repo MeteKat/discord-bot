@@ -23,7 +23,7 @@ var game_info = {
 	url: "",
 	result: "",
 	time: "",
-	game_ids: {}
+	game_ids: {},
 }
 
 
