@@ -66,10 +66,8 @@ async function main() {
 	
 	client.on("ready", async () => {
 		console.log(`Logged in as ${client.user.tag}!`);
-		const bot = client.channels.cache.find((abc) => abc.name == "bot-test");
-		//bot.send("Sa")
 		check_for_new_data( client, game_datas)
-		setInterval(()=>check_for_new_data( client, game_datas), 1000 * 30 * 1);
+		setInterval(()=>check_for_new_data( client, game_datas), 1000 * 20 * 1);
 	});
 
 	client.login(`${process.env.TOKEN}`);

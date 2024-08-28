@@ -58,7 +58,7 @@ async function fill_game_info(opponents, game_data, last_game_data, user_id) {
 	last_game_data.url = temp_url.replace("api/v0/", "")
 	last_game_data.server = game_data.server
 	last_game_data.map = game_data.map
-	last_game_data.time = Number((game_data.duration/60).toFixed(2))
+	last_game_data.time = Number((game_data.duration/60).toFixed(2)).toString() + " dk" + " " + Number((game_data.duration%60).toFixed(0)).toString() + " sn"
 	last_game_data.game_ids = {...last_game_data.game_ids,[user_id] : game_data.game_id}
 
 	await last_game_data.save()
@@ -95,7 +95,7 @@ async function make_embed(game_data) {
 	.setDescription(game_data.time.toString())
 	.setThumbnail(map_urls[game_data.map])
 	.addFields(
-		{ name: game_data.server, value: `süre: ${game_data.time.toString()}` },
+		{ name: game_data.server, value: `süre: ${game_data.time}` },
 		{ name: '\u200B', value: '\u200B' },
 		//{ name: 'Inline field title', value: 'Some value here', inline: true },
 		//{ name: 'Inline field title', value: 'Some value here', inline: true },
