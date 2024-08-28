@@ -65,7 +65,7 @@ async function fill_game_info(opponents, game_data, last_game_data, user_id) {
 }
 
 async function get_game_data(user_id) {
-	const response = await fetch(`${process.env.PROFILE_URL}/${user_id}/games`);
+	const response = await fetch(`${process.env.PROFILE_URL}/${user_id}/games?limit=1`);
 	const data = await response.json();
 	
 	if(!data || !data.games || data.games.length == 0)
