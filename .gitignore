@@ -3,3 +3,4 @@ node_modules
 deneme.js
 deneme2.js
 .gitignore
+Makefile

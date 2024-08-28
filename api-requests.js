@@ -64,7 +64,6 @@ async function fill_game_info(opponents, game_data, last_game_data, user_id) {
 	await last_game_data.save()
 }
 
-////TODO - debugger öğren
 async function get_game_data(user_id) {
 	const response = await fetch(`${process.env.PROFILE_URL}/${user_id}/games`);
 	const data = await response.json();

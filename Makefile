@@ -1,10 +1,11 @@
 CONNECT_STRING = -i ~/dcbot-2.pem ec2-user@16.171.146.128
 
-
+commit-message := $(if $(filter-out undefined,$(origin msg)),$(msg),"Update")
 
 git:
 	git add .
-	git commit -m $(message)
+	git commit -m $(commit-message)
+	git push
 
 ssh:
 	ssh $(CONNECT_STRING) 
@@ -12,7 +13,10 @@ ssh:
 sftp:
 	sftp $(CONNECT_STRING)
 
-deploy: git
+put_sftp:
+	printf 'cd /home/ec2-user/server\nput Makefile\nput .env\nexit\n' | sftp $(CONNECT_STRING)
+
+deploy:
 	ssh $(CONNECT_STRING) -t 'cd /home/ec2-user/server && git pull && make stop && make clean && make build && make run'
 
 build:
@@ -28,7 +32,6 @@ clean:
 	docker rm $(shell docker ps -a -q)
 	docker rmi $(shell docker images -q)
 
-
 all: deploy
 
 
@@ -41,6 +44,9 @@ help:
 	@echo "clean - Remove all docker containers and images"
 	@echo "ssh - SSH into the server"
 	@echo "sftp - SFTP into the server"
+	@echo "put_sftp - Put Makefile and .env to the server"
+	@echo "git - Git add, commit and push"
+	
 
 readme:
 	@echo "This is a makefile for deploying the bot to the server"
@@ -51,6 +57,8 @@ readme:
 	@echo "To clean up all docker containers and images, run 'make clean'"
 	@echo "To SSH into the server, run 'make ssh'"
 	@echo "To SFTP into the server, run 'make sftp'"
-
+	@echo "To put Makefile and .env to the server, run 'make put_sftp'"
+	@echo "To add, commit and push to git, run 'make git'"
+	
 
 .PHONY: deploy build run stop clean ssh sftp
