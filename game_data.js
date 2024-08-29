@@ -1,12 +1,11 @@
 const mongoose = require('mongoose')
 
 
-
 const game_data_schema = new mongoose.Schema({
 	server: String,
 	map: String,
-	opponents: Array,
-	opponents_civs: Array,
+	teams: Array,
+	civs: Array,
 	opponents_elos: Array,
 	url: String,
 	result: String,
@@ -17,15 +16,18 @@ const game_data_schema = new mongoose.Schema({
 var game_info = {
 	server: "",
 	map: "",
-	opponents: [],
-	opponents_civs: [],
+	teams: [[],[]],
+	civs: [[],[]],
 	opponents_elos: [],
 	url: "",
 	result: "",
 	time: "",
-	game_ids: {},
+	game_ids: {
+		8822803:142309183,
+		8822751:143192680,
+		17078472:0
+	},
 }
-
 
 
 async function create_db() {

@@ -5,3 +5,6 @@ deneme2.js
 .gitignore
 Makefile
 todo.txt
+mint.code-profile
+.vscode/
+mint_dcbot.pem

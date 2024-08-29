@@ -11,7 +11,7 @@
 			"skipFiles": [
 				"<node_internals>/**"
 			],
-			"program": "${workspaceFolder}\\discord-bot.js"
+			"program": "${workspaceFolder}/discord-bot.js"
 		}
 	]
 }

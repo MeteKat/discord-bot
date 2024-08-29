@@ -1,7 +1,13 @@
+//const name_list = {
+//	mete2241:"17078472", 
+//	akustikyollar:"8822751",
+//	matatarr:"8822803"
+//}
+
 const name_list = {
-	mete2241:"17078472", 
-	akustikyollar:"8822751",
-	matatarr:"8822803"
+	TırnakPide:"17078472", 
+	KelekKarpuz:"8822751",
+	TulumPeyniri:"8822803"
 }
 
 const names = [
@@ -85,7 +91,7 @@ const map_urls = {
 	"Volcanic Island" : "https://liquipedia.net/commons/images/c/ca/Volcanic_Island_%28AoE4%29.PNG",
 	"Warring Island" : "https://liquipedia.net/commons/images/3/35/Warring_Islands_AoE4.png",
 	"Water Drake" : "",
-	"Water Holes" : "https://liquipedia.net/commons/images/b/b1/Waterholes_%28AoE4%29_Icon.JPG",
+	"Waterholes" : "https://liquipedia.net/commons/images/b/b1/Waterholes_%28AoE4%29_Icon.JPG",
 	"Wetlands" : "https://liquipedia.net/commons/images/thumb/a/a4/Wetlands_AoE4_map.png/300px-Wetlands_AoE4_map.png",
 	"WoodWall" : "https://liquipedia.net/commons/images/2/2b/Woodwall_%28AoE4%29_Icon.png"
 }

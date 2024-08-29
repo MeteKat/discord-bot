@@ -1,4 +1,4 @@
-CONNECT_STRING = -i ~/dcbot-2.pem ec2-user@16.171.146.128
+CONNECT_STRING = -i mint_dcbot.pem ec2-user@16.171.146.128
 
 commit-message := $(if $(filter-out undefined,$(origin msg)),$(msg),"Update")
 
