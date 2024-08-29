@@ -26,15 +26,25 @@ run:
 	docker run -d dcbot:latest
 
 stop:
-	docker stop $(shell docker ps -q)
+	@if [ -n "$(shell docker ps -q)" ]; then \
+		docker stop $(shell docker ps -q); \
+	else \
+		echo "No running containers to stop."; \
+	fi
 
 clean:
-	docker rm $(shell docker ps -a -q)
-	docker rmi $(shell docker images -q)
+	@if [ -n "$(shell docker ps -a -q)" ]; then \
+		docker rm $(shell docker ps -a -q); \
+	else \
+		echo "No containers to remove."; \
+	fi
+	@if [ -n "$(shell docker images -q)" ]; then \
+		docker rmi $(shell docker images -q); \
+	else \
+		echo "No images to remove."; \
+	fi
 
 all: deploy
-
-
 
 help:
 	@echo "deploy - Deploy the bot to the server"
@@ -47,7 +57,6 @@ help:
 	@echo "put_sftp - Put Makefile and .env to the server"
 	@echo "git - Git add, commit and push"
 	
-
 readme:
 	@echo "This is a makefile for deploying the bot to the server"
 	@echo "To deploy the bot, run 'make deploy'"
@@ -59,6 +68,5 @@ readme:
 	@echo "To SFTP into the server, run 'make sftp'"
 	@echo "To put Makefile and .env to the server, run 'make put_sftp'"
 	@echo "To add, commit and push to git, run 'make git'"
-	
 
 .PHONY: deploy build run stop clean ssh sftp
