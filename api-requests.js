@@ -3,11 +3,11 @@ require("dotenv").config();
 const { EmbedBuilder } = require("discord.js");
 const { names, map_urls, name_list } = require('./enums.js');
 
+
 async function get_elo(id) {
 	const response = await fetch(`${process.env.PROFILE_URL}/${id}`);
 	const data = await response.json();
 	
-
 	if(Object.keys(data.modes).length == 0)
 		return "unranked";
 	let relevant_elo = Object.keys(data.modes)[0]
@@ -60,7 +60,7 @@ async function fill_game_info(teams, game_data_response, last_game_data, user_id
 
 function get_result(game_data_response) {
 
-	return names.includes(game_data_response.teams[0][0].player) ? game_data_response.teams[0][0].player.result : game_data_response.teams[1][0].player.result
+	return names.includes(game_data_response.teams[0][0].player.name) ? game_data_response.teams[0][0].player.result : game_data_response.teams[1][0].player.result
 }
 
 async function get_game_data(user_id) {

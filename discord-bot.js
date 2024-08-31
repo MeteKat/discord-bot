@@ -27,10 +27,8 @@ async function check_for_new_data(client, game_datas) {
 			last_game_data.game_ids = {}
 		if(Object.values(last_game_data.game_ids).includes(game_data_response.game_id) || game_data_response.ongoing == true || game_data_response.just_finished == true)
 			continue
-		//const opponents = await get_opponents_data(last_game_data, game_data_response);
 		const teams = get_teams_data(game_data_response);
 		await fill_game_info(teams, game_data_response, last_game_data, user);
-		//await fill_game_info(opponents, game_data_response, last_game_data, user);
 		let embed = await make_embed(last_game_data);
 		reset_game_info(game_datas);
 		console.log("New data found for " + user + "\n");
